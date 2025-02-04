@@ -18,12 +18,14 @@ id_usuario 	varchar(45) primary key default(uuid()),
 email 		varchar(45) not null,
 senha 		varchar(45) not null,
 nome 		varchar(45) not null,
+tipo_usuario enum("NormalUser", 'Admin') default ('NormalUser') not null,
 version long
 );
 
 create table if not exists avaliacao(
 id_avaliacao 	integer auto_increment primary key,
 id_usuario 		varchar(45),
+data_criacao	datetime default current_timestamp,
 titulo			varchar(45),
 nota 			real,
 texto 			text not null,
@@ -64,7 +66,7 @@ foreign key (id_avaliacao) references avaliacao(id_avaliacao) on delete cascade
 );
 
 -- Inserindo valores nas tabelas
-insert into usuario values(default, "pedro@gmail.com", "123456", "Pedro", '1');
+insert into usuario values(default, "pedro@gmail.com", "123456", "Pedro","Admin", '1');
 
 insert into usuario values(default, "joao@gmail.com", "67898", "Joao", "2");
 select * from usuario;
